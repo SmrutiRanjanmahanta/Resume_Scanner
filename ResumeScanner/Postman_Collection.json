@@ -1,0 +1,265 @@
+{
+  "info": {
+    "_postman_id": "resume-scanner-api",
+    "name": "ResumeScanner API",
+    "description": "Complete API collection for ResumeScanner application with AI-powered resume analysis",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Upload Resume",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(\"Response has required fields\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('success');",
+              "    pm.expect(jsonData).to.have.property('resumeId');",
+              "    pm.expect(jsonData).to.have.property('fileName');",
+              "    pm.expect(jsonData).to.have.property('message');",
+              "});",
+              "",
+              "pm.test(\"Upload successful\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.success).to.be.true;",
+              "    if (jsonData.success) {",
+              "        pm.environment.set(\"resumeId\", jsonData.resumeId);",
+              "        console.log(\"Resume ID saved to environment:\", jsonData.resumeId);",
+              "    }",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "",
+              "description": "Select your resume file (PDF, DOCX, TXT)"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/resume/upload",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "resume", "upload"]
+        },
+        "description": "Upload a resume file for analysis. Supports PDF, DOCX, and text files."
+      },
+      "response": []
+    },
+    {
+      "name": "Analyze Resume",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response has analysis data\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('success');",
+              "    pm.expect(jsonData).to.have.property('score');",
+              "    pm.expect(jsonData).to.have.property('matchedSkills');",
+              "    pm.expect(jsonData).to.have.property('missingSkills');",
+              "    pm.expect(jsonData).to.have.property('explanation');",
+              "    pm.expect(jsonData).to.have.property('analysisId');",
+              "});",
+              "",
+              "pm.test(\"Analysis successful\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.success).to.be.true;",
+              "    pm.expect(jsonData.score).to.be.a('number');",
+              "    pm.expect(jsonData.matchedSkills).to.be.an('array');",
+              "    pm.expect(jsonData.missingSkills).to.be.an('array');",
+              "    if (jsonData.success) {",
+              "        pm.environment.set(\"analysisId\", jsonData.analysisId);",
+              "        console.log(\"Analysis ID saved to environment:\", jsonData.analysisId);",
+              "    }",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"resumeId\": {{resumeId}},\n  \"jobDescription\": \"We are looking for a Java developer with Spring Boot, REST APIs, and MySQL experience. The ideal candidate should have strong knowledge of Java fundamentals, database design, and web application development.\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/resume/analyze",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "resume", "analyze"]
+        },
+        "description": "Analyze an uploaded resume against a job description using AI."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Analysis Result",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response has analysis data\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('success');",
+              "    pm.expect(jsonData).to.have.property('score');",
+              "    pm.expect(jsonData).to.have.property('matchedSkills');",
+              "    pm.expect(jsonData).to.have.property('missingSkills');",
+              "    pm.expect(jsonData).to.have.property('explanation');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/resume/result/{{analysisId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "resume", "result", "{{analysisId}}"]
+        },
+        "description": "Retrieve a specific analysis result by ID."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Latest Analysis for Resume",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response has analysis data\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('success');",
+              "    pm.expect(jsonData).to.have.property('score');",
+              "    pm.expect(jsonData).to.have.property('matchedSkills');",
+              "    pm.expect(jsonData).to.have.property('missingSkills');",
+              "    pm.expect(jsonData).to.have.property('explanation');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/resume/{{resumeId}}/latest-result",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "resume", "{{resumeId}}", "latest-result"]
+        },
+        "description": "Get the latest analysis result for a specific resume."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Resume Details",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response has resume data\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "    pm.expect(jsonData).to.have.property('fileName');",
+              "    pm.expect(jsonData).to.have.property('fileType');",
+              "    pm.expect(jsonData).to.have.property('uploadDate');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/resume/{{resumeId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "resume", "{{resumeId}}"]
+        },
+        "description": "Get detailed information about a specific resume."
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Set default values if not present",
+          "if (!pm.environment.get(\"baseUrl\")) {",
+          "    pm.environment.set(\"baseUrl\", \"http://localhost:8080\");",
+          "}",
+          "",
+          "// Log current environment values",
+          "console.log(\"Base URL:\", pm.environment.get(\"baseUrl\"));",
+          "console.log(\"Resume ID:\", pm.environment.get(\"resumeId\"));",
+          "console.log(\"Analysis ID:\", pm.environment.get(\"analysisId\"));"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}
