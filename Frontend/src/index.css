@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-brand-primary: #3b82f6; /* blue-500 */
+  --color-brand-secondary: #8b5cf6; /* violet-500 */
+  --color-brand-accent: #06b6d4; /* cyan-500 */
+  --color-brand-dark: #020617; /* custom dark bg requested by user */
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: #f8fafc;
+  margin: 0;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100%;
+}
+
+html.dark body {
+  background: #020617;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+}
+
+::selection {
+  background-color: rgba(139, 92, 246, 0.3); /* violet-500 */
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e2f;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* Custom glow utilities */
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-violet-400 to-cyan-400;
+  }
+  
+  .border-glow {
+    @apply border border-black/5 dark:border-white/10 shadow-[0_0_15px_rgba(59,130,246,0.1)] dark:shadow-[0_0_15px_rgba(59,130,246,0.15)] hover:shadow-[0_0_25px_rgba(139,92,246,0.2)] dark:hover:shadow-[0_0_25px_rgba(139,92,246,0.3)] hover:border-black/10 dark:hover:border-white/20 transition-all duration-300;
+  }
+
+  .bg-glass {
+    @apply bg-white/60 dark:bg-[#0a0a14]/60 backdrop-blur-xl border-black/5 dark:border-white/5;
+  }
+}
