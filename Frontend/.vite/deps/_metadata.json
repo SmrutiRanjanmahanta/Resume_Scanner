@@ -1,0 +1,102 @@
+{
+  "hash": "9e284c4b",
+  "configHash": "2a110344",
+  "lockfileHash": "9b5281ea",
+  "browserHash": "562c319b",
+  "optimized": {
+    "@react-three/drei": {
+      "src": "../../node_modules/@react-three/drei/index.js",
+      "file": "@react-three_drei.js",
+      "fileHash": "96878b3b",
+      "needsInterop": false
+    },
+    "@react-three/fiber": {
+      "src": "../../node_modules/@react-three/fiber/dist/react-three-fiber.esm.js",
+      "file": "@react-three_fiber.js",
+      "fileHash": "b328d7a2",
+      "needsInterop": false
+    },
+    "framer-motion": {
+      "src": "../../node_modules/framer-motion/dist/es/index.mjs",
+      "file": "framer-motion.js",
+      "fileHash": "d1d13508",
+      "needsInterop": false
+    },
+    "gsap": {
+      "src": "../../node_modules/gsap/index.js",
+      "file": "gsap.js",
+      "fileHash": "7cb7b071",
+      "needsInterop": false
+    },
+    "gsap/ScrollTrigger": {
+      "src": "../../node_modules/gsap/ScrollTrigger.js",
+      "file": "gsap_ScrollTrigger.js",
+      "fileHash": "0b47480b",
+      "needsInterop": false
+    },
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.mjs",
+      "file": "lucide-react.js",
+      "fileHash": "5bb4b6c9",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "bfb37cca",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "d0428ea0",
+      "needsInterop": true
+    },
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "7ea39097",
+      "needsInterop": true
+    },
+    "three": {
+      "src": "../../node_modules/three/build/three.module.js",
+      "file": "three.js",
+      "fileHash": "80d28026",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-CYJPkc-J": {
+      "file": "chunk-CYJPkc-J.js",
+      "isDynamicEntry": false
+    },
+    "client-B1BZPRYe": {
+      "file": "client-B1BZPRYe.js",
+      "isDynamicEntry": false
+    },
+    "hls-NDBL-ujy": {
+      "file": "hls-NDBL-ujy.js",
+      "isDynamicEntry": false
+    },
+    "jsx-runtime-BH9oUQ93": {
+      "file": "jsx-runtime-BH9oUQ93.js",
+      "isDynamicEntry": false
+    },
+    "react-three-fiber.esm-CL9vXMlo": {
+      "file": "react-three-fiber.esm-CL9vXMlo.js",
+      "isDynamicEntry": false
+    },
+    "scheduler-CtQc8lLn": {
+      "file": "scheduler-CtQc8lLn.js",
+      "isDynamicEntry": false
+    },
+    "three.module-BT25UgrA": {
+      "file": "three.module-BT25UgrA.js",
+      "isDynamicEntry": false
+    },
+    "vision_bundle-bsoH7_t-": {
+      "file": "vision_bundle-bsoH7_t-.js",
+      "isDynamicEntry": true
+    }
+  }
+}
